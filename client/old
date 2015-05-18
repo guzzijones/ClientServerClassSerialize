@@ -1,0 +1,24 @@
+std::string dataToSend = "Hello World! This is a string of any length ...";
+uint32_t dataLength = htonl(dataToSend.size()); // Ensure network byte order 
+int ok=send(sockfd,&dataLength ,sizeof(uint32_t) ,MSG_CONFIRM); // Send the data length
+if(ok!=-1){
+   uint32_t sent=0;
+   while(dataLength >0){
+       sent=send(sockfd,dataToSend.c_str(),dataLength,MSG_CONFIRM); // Send the string 
+       if(sent==0){
+         std::cout << "socket Closed" << std::endl;
+         break;
+         }
+       else if(sent<0){
+         std::cout << "Error Sending" << std::endl;
+         break;
+       }
+       dataToSend+=sent;
+       dataLength-=sent;
+         
+   } 
+}
+else
+   std::cout << "socket not connected" << std::endl;
+
+

@@ -1,0 +1,17 @@
+
+#include <string>
+#include <iostream>
+#include "todoFactory.h"
+
+#include <memory>
+
+int main(void)
+{
+  char mtype=0x01;
+   std::string dataToSend = "ls -al /home/ajonen";
+
+   auto tmpTodoFactory=todoFactory::create(); //create factory
+   auto anExecTodo=tmpTodoFactory->createExec(dataToSend); //create ExecTodo from factory
+   std::string toSend= tmpTodoFactory->save(std::move(anExecTodo));
+  return 0;
+}

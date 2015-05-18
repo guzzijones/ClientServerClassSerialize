@@ -1,0 +1,45 @@
+Base:
+
+1. protoField - gives a length and value
+   length
+   value
+
+2. protoService - does sending and receiving
+
+
+subclasses:
+
+1. protocolBase - 
+   inherits: 
+   protoservice - to send and recieve
+
+   contains:
+   protofield - to accept entire message
+
+
+2. protocolType
+   inherits:
+   protocolBase - to get the full message
+
+   contains:
+   protofield - message type, int;  This field tells us the type of message
+
+3. protocolFactory
+   creates :
+   protocolExec, based on protocol Type,
+
+4. protocolExec;
+   inherits:
+   protocolType
+
+   contains 
+   protoField - _action
+
+5. protoResult:
+   inherits:
+   protocolType
+   contains:
+   protoField - _result
+
+
+
